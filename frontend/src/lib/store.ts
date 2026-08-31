@@ -33,6 +33,8 @@ interface AppState {
   setIsScienceModalOpen: (open: boolean) => void;
   isAttributionModalOpen: boolean;
   setIsAttributionModalOpen: (open: boolean) => void;
+  isGuideModalOpen: boolean;
+  setIsGuideModalOpen: (open: boolean) => void;
 
   // Active toast / notification siren
   activeNotification: {
@@ -80,6 +82,9 @@ export const useAppStore = create<AppState>((set) => ({
 
   isAttributionModalOpen: false,
   setIsAttributionModalOpen: (open) => set({ isAttributionModalOpen: open }),
+
+  isGuideModalOpen: false,
+  setIsGuideModalOpen: (open) => set({ isGuideModalOpen: open }),
 
   activeNotification: null,
   setActiveNotification: (notif) => set({ activeNotification: notif }),

@@ -125,11 +125,11 @@ export const ThreatMap: React.FC = () => {
           const marker = L.circleMarker([lat, lon], {
             radius: radius,
             fillColor: "#ef4444",
-            color: "#ff7878",
+            color: "#ffffff",
             weight: 1.5,
-            opacity: 0.9,
-            fillOpacity: 0.75,
-            className: "fire-marker-pulse cursor-pointer"
+            opacity: 0.95,
+            fillOpacity: 0.85,
+            className: "fire-marker-static cursor-pointer"
           });
 
           marker.on("click", () => {
@@ -322,13 +322,13 @@ export const ThreatMap: React.FC = () => {
 
       {/* Floating Map Legend & Stats Overlay */}
       <div className="absolute top-4 left-4 z-10 bg-slate-900/85 backdrop-blur border border-slate-800 rounded-xl p-3 shadow-xl max-w-xs pointer-events-auto">
-        <div className="flex items-center justify-between border-b border-slate-800 pb-2 mb-2.5">
+        <div className="flex items-center justify-between gap-3 border-b border-slate-800 pb-2 mb-2.5">
           <div className="flex items-center space-x-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-xs font-semibold text-slate-200">Orbital Telemetry</span>
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse inline-block" />
+            <span className="text-xs font-bold text-slate-100 uppercase tracking-wide">Orbital Telemetry</span>
           </div>
-          <span className="text-[10px] text-slate-400 font-mono">
-            {firesData.length} FIRMS Detections
+          <span className="text-[11px] text-emerald-400 font-mono font-semibold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30 whitespace-nowrap">
+            {firesData.length} Detections
           </span>
         </div>
 

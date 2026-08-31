@@ -63,16 +63,17 @@ export const TopBar: React.FC = () => {
           <div className="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold">
             <Flame className="w-5 h-5 text-emerald-400" />
           </div>
-          <div>
-            <div className="flex items-center space-x-2">
-              <span className="font-extrabold tracking-wider text-base bg-gradient-to-r from-emerald-400 via-teal-300 to-sky-400 bg-clip-text text-transparent">
+          <div className="flex flex-col justify-center">
+            <div className="flex items-center gap-2.5 flex-wrap">
+              <span className="font-extrabold tracking-wider text-base md:text-lg bg-gradient-to-r from-emerald-400 via-teal-300 to-sky-400 bg-clip-text text-transparent select-none whitespace-nowrap">
                 TERRASHIELD
               </span>
-              <span className="bg-emerald-500/20 text-emerald-400 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-emerald-500/30 tracking-wide uppercase animate-pulse">
-                LIVE SATELLITE FEED
+              <span className="inline-flex items-center bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-500/40 tracking-wider uppercase whitespace-nowrap">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-ping inline-block" />
+                LIVE ORBITAL SENSORS
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 font-mono hidden md:block">
+            <p className="text-[11px] text-slate-400 font-mono tracking-tight hidden sm:block whitespace-nowrap mt-0.5">
               EARTH OBSERVATION RISK COMMAND CENTER
             </p>
           </div>
@@ -117,6 +118,16 @@ export const TopBar: React.FC = () => {
           <span className="hidden xl:inline text-[11px] font-mono text-slate-400">
             {lastRefreshTime}
           </span>
+        </button>
+
+        {/* Guide / How to Use Trigger */}
+        <button
+          onClick={() => useAppStore.getState().setIsGuideModalOpen(true)}
+          className="px-2.5 py-1.5 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/50 rounded-lg text-xs text-emerald-300 transition-colors flex items-center space-x-1.5 shadow-sm shadow-emerald-950"
+          title="Interactive Platform Guide"
+        >
+          <BookOpen className="w-3.5 h-3.5 text-emerald-400" />
+          <span className="font-semibold text-xs">How to Use</span>
         </button>
 
         {/* Science Modal Trigger */}

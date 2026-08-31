@@ -11,6 +11,7 @@ import { ImpactAnalytics } from "@/components/analytics/ImpactAnalytics";
 import { CommunityReportModal } from "@/components/modals/CommunityReportModal";
 import { AboutScienceModal } from "@/components/modals/AboutScienceModal";
 import { AttributionModal } from "@/components/modals/AttributionModal";
+import { UserGuideModal } from "@/components/modals/UserGuideModal";
 import { useAppStore } from "@/lib/store";
 import { AlertCircle, X, Flame } from "lucide-react";
 
@@ -20,12 +21,22 @@ export default function Home() {
     activeTab,
     toggleLayer,
     setIsReportModalOpen,
+    setIsGuideModalOpen,
     activeNotification,
     setActiveNotification
   } = useAppStore();
 
+  // Auto-launch User Guide on first visit
+  useEffect(() => {
+    const hasSeenGuide = localStorage.getItem("terrashield_guide_viewed");
+    if (!hasSeenGuide) {
+      setIsGuideModalOpen(true);
+      localStorage.setItem("terrashield_guide_viewed", "true");
+    }
+  }, [setIsGuideModalOpen]);
+
   // Keyboard shortcut listener per specification:
-  // "/" for search, "L" for layer toggle, "R" for report
+  // "/" for search, "L" for layer toggle, "R" for report, "?" for guide
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Don't trigger if user is typing in an input or textarea
@@ -43,6 +54,9 @@ export default function Home() {
       } else if (e.key === "r" || e.key === "R") {
         e.preventDefault();
         setIsReportModalOpen(true);
+      } else if (e.key === "?" || e.key === "h" || e.key === "H") {
+        e.preventDefault();
+        setIsGuideModalOpen(true);
       } else if (e.key === "Escape") {
         setActiveNotification(null);
       }
@@ -50,7 +64,7 @@ export default function Home() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [toggleLayer, setIsReportModalOpen, setActiveNotification]);
+  }, [toggleLayer, setIsReportModalOpen, setIsGuideModalOpen, setActiveNotification]);
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans select-none">
@@ -115,6 +129,7 @@ export default function Home() {
       <CommunityReportModal />
       <AboutScienceModal />
       <AttributionModal />
+      <UserGuideModal />
     </div>
   );
 }
