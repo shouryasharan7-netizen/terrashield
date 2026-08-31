@@ -26,13 +26,9 @@ export default function Home() {
     setActiveNotification
   } = useAppStore();
 
-  // Auto-launch User Guide on first visit
+  // Auto-launch User Guide as soon as users enter the website
   useEffect(() => {
-    const hasSeenGuide = localStorage.getItem("terrashield_guide_viewed");
-    if (!hasSeenGuide) {
-      setIsGuideModalOpen(true);
-      localStorage.setItem("terrashield_guide_viewed", "true");
-    }
+    setIsGuideModalOpen(true);
   }, [setIsGuideModalOpen]);
 
   // Keyboard shortcut listener per specification:

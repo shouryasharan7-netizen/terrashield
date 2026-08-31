@@ -83,7 +83,7 @@ export const useAppStore = create<AppState>((set) => ({
   isAttributionModalOpen: false,
   setIsAttributionModalOpen: (open) => set({ isAttributionModalOpen: open }),
 
-  isGuideModalOpen: false,
+  isGuideModalOpen: true,
   setIsGuideModalOpen: (open) => set({ isGuideModalOpen: open }),
 
   activeNotification: null,
