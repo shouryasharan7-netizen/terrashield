@@ -56,50 +56,49 @@ export const TopBar: React.FC = () => {
   };
 
   return (
-    <header className="h-16 border-b border-slate-800 bg-slate-900/90 backdrop-blur px-5 flex items-center justify-between z-30 sticky top-0">
+    <header className="min-h-16 py-2 md:py-0 border-b border-slate-800 bg-slate-900/95 backdrop-blur px-4 md:px-6 flex flex-wrap lg:flex-nowrap items-center justify-between gap-3 z-30 sticky top-0">
       {/* Brand & Live Counter */}
-      <div className="flex items-center space-x-4">
-        <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold">
-            <Flame className="w-5 h-5 text-emerald-400" />
+      <div className="flex items-center space-x-3 shrink-0">
+        <div className="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold shrink-0">
+          <Flame className="w-5 h-5 text-emerald-400" />
+        </div>
+        <div className="flex flex-col">
+          <div className="flex items-center space-x-2">
+            <span className="font-black tracking-wider text-base md:text-lg bg-gradient-to-r from-emerald-400 via-teal-300 to-sky-400 bg-clip-text text-transparent select-none whitespace-nowrap">
+              TERRASHIELD
+            </span>
+            <span className="inline-flex items-center bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-500/40 tracking-wider uppercase whitespace-nowrap">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse inline-block" />
+              LIVE
+            </span>
           </div>
-          <div className="flex flex-col justify-center">
-            <div className="flex items-center gap-2.5 flex-wrap">
-              <span className="font-extrabold tracking-wider text-base md:text-lg bg-gradient-to-r from-emerald-400 via-teal-300 to-sky-400 bg-clip-text text-transparent select-none whitespace-nowrap">
-                TERRASHIELD
-              </span>
-              <span className="inline-flex items-center bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-500/40 tracking-wider uppercase whitespace-nowrap">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-ping inline-block" />
-                LIVE ORBITAL SENSORS
-              </span>
-            </div>
-            <p className="text-[11px] text-slate-400 font-mono tracking-tight hidden sm:block whitespace-nowrap mt-0.5">
-              EARTH OBSERVATION RISK COMMAND CENTER
-            </p>
-          </div>
+          <p className="text-[10px] text-slate-400 font-mono tracking-tight whitespace-nowrap">
+            EARTH OBSERVATION RISK COMMAND CENTER
+          </p>
         </div>
 
-        {/* Judging Optimization: Early Mitigation Impact Counter */}
-        <div className="hidden lg:flex items-center bg-slate-800/80 border border-slate-700/60 rounded-lg px-3 py-1.5 space-x-2.5">
-          <ShieldCheck className="w-4 h-4 text-emerald-400" />
-          <div className="text-xs">
-            <span className="text-slate-400">Protected Acreage:</span>{" "}
-            <span className="text-emerald-400 font-bold font-mono">19,200 acres</span>
-            <span className="text-[10px] text-slate-400 ml-1">(Early Alert Shield)</span>
+        {/* Early Mitigation Impact Counter */}
+        <div className="hidden xl:flex items-center bg-slate-800/90 border border-slate-700/80 rounded-xl px-3 py-1.5 space-x-2 shrink-0 ml-2">
+          <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+          <div className="text-xs leading-none">
+            <div className="text-[10px] text-slate-400 uppercase tracking-wider font-semibold">Protected Acreage</div>
+            <div className="text-emerald-400 font-black font-mono mt-0.5">
+              19,200 acres <span className="text-[10px] font-normal text-slate-400">(Early Shield)</span>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Center: Global Search */}
-      <form onSubmit={handleSearch} className="relative max-w-xs md:max-w-md w-full mx-4">
+      <form onSubmit={handleSearch} className="relative flex-1 max-w-sm md:max-w-md mx-1 lg:mx-3 min-w-[200px]">
         <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
         <input
           type="text"
           id="global-search-input"
-          placeholder="Search region (e.g. California, Amazon, Australia, Greece) — Press '/' "
+          placeholder="Search region (e.g. California, Amazon, Australia) — Press '/' "
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full bg-slate-950/80 border border-slate-800 rounded-lg pl-9 pr-8 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/40 transition-all font-sans"
+          className="w-full bg-slate-950/90 border border-slate-800 rounded-xl pl-9 pr-8 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/40 transition-all font-sans"
         />
         <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-slate-500 font-mono bg-slate-800/80 px-1.5 py-0.5 rounded border border-slate-700/60">
           /
