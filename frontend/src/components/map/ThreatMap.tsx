@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useAppStore } from "@/lib/store";
 import { fetchFires, fetchAirQuality, fetchReports, FireFeature, AirQualityFeature, CommunityReportFeature } from "@/lib/api";
+import CACHED_FIRES from "@/lib/cached_fires.json";
 import { Flame, Wind, Trees, AlertTriangle, Shield, CheckCircle2, Navigation, Layers, RefreshCw } from "lucide-react";
 import "leaflet/dist/leaflet.css";
 
@@ -67,23 +68,29 @@ export const ThreatMap: React.FC = () => {
         leafletMapRef.current = map;
       }
 
-      // Load live data from API
+      // Load live data from API with instant fallback
       try {
         const [firesRes, aqiRes, reportsRes] = await Promise.all([
-          fetchFires(600).catch(() => ({ features: [] })),
+          fetchFires(600).catch(() => ({ features: CACHED_FIRES })),
           fetchAirQuality().catch(() => ({ features: [] })),
           fetchReports().catch(() => ({ features: [] }))
         ]);
 
         if (isMounted) {
-          setFiresData(firesRes.features || []);
+          const loadedFires = (firesRes.features && firesRes.features.length > 0)
+            ? firesRes.features
+            : CACHED_FIRES;
+          setFiresData(loadedFires);
           setAqiData(aqiRes.features || []);
           setReportsData(reportsRes.features || []);
           setLoading(false);
         }
       } catch (err) {
-        console.error("Map data loading error:", err);
-        setLoading(false);
+        console.error("Map data loading error, loading cached detections:", err);
+        if (isMounted) {
+          setFiresData(CACHED_FIRES as any);
+          setLoading(false);
+        }
       }
     }
 
